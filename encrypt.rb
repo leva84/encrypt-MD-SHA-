@@ -23,10 +23,11 @@ until encrypt_method.between?(1, 3)
   encrypt_method = STDIN.gets.to_i
 end
 
-puts 'Вот что получилось:'
+encrypt = case encrypt_method
+          when 1 then Digest::MD5.hexdigest(string)
+          when 2 then Digest::SHA1.hexdigest(string)
+          when 3 then Digest::SHA2.hexdigest(string)
+          end
 
-case encrypt_method
-when 1 then puts Digest::MD5.hexdigest(string)
-when 2 then puts Digest::SHA1.hexdigest(string)
-when 3 then puts Digest::SHA2.hexdigest(string)
-end
+puts 'Вот что получилось:'
+puts encrypt.gsub("", " ")
